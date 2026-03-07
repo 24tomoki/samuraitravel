@@ -25,6 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
             User user = userRepository.findByEmail(email);
+            System.out.println(user.getName());
+            System.out.println(user.getEmail());
+            System.out.println("DBから取得したパスワード: [" + user.getPassword() + "]");
+            System.out.println("DBから取得した有効フラグ: " + user.getEnabled());
             String userRoleName = user.getRole().getName();
             Collection<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(userRoleName));
